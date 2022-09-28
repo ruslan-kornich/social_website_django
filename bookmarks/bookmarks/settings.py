@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from django.urls import reverse_lazy
 import environ
 import os
 
@@ -139,3 +139,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
